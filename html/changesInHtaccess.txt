@@ -1,0 +1,25 @@
+  ##
+    # By default, Contao adds ".html" to the generated URLs to simulate static
+    # HTML documents. If you change the URL suffix in the back end settings, make
+    # sure to change it here accordingly!
+    #
+    #   RewriteRule .*\.html$ index.php [L]   # URL suffix .html
+    #   RewriteRule .*\.txt$ index.php [L]    # URL suffix .txt
+    #   RewriteRule .*\.json$ index.php [L]   # URL suffix .json
+    #
+    # If you do not want to use an URL suffix at all, you have to add a second
+    # line to prevent URLs that point to folders from being rewritten (see #4031).
+    #
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} !(\.|/$)
+    RewriteRule ^(.*)$ /krossmediakit/$1.html [R=301,L]
+    #
+    # If you are using mod_cache, it is recommended to use the RewriteRule below,
+    # which adds the query string to the internal URL:
+    #
+    #   RewriteRule (.*\.html)$ index.php/$1 [L]
+    #
+    # Note that not all environments support mod_rewrite and mod_cache.
+    ##
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule .*\.html$ index.php [L]
